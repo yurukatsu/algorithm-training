@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  dev-python:
+    image: algorithm-training-python:3.10-bullseye
+    container_name: algorithm-training-python
+    build:
+      context: ./docker-python
+      dockerfile: python.Dockerfile
+    tty: true
+    ports:
+      - 8711:8511
+    volumes:
+      - ..:/workspace
+      - ${HOME}/.ssh:/root/.ssh
+      - ${HOME}/.aws:/root/.aws
+    networks:
+      - default
+
+networks:
+  default:
+    name: net-algorithm-training
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${COMPOSED_SUBNET}
