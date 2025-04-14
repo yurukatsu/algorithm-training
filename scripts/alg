@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# ANSI color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Function to display usage information
+show_usage() {
+    echo -e "${BLUE}Algorithm Training Tool${NC}"
+    echo ""
+    echo -e "Usage: alg <command> [arguments]"
+    echo ""
+    echo -e "Available commands:"
+    echo -e "  ${GREEN}test${NC} <directory>    Run tests for the specified directory"
+    echo -e "  ${GREEN}create${NC} <directory>  Create a new project directory with template files"
+    echo -e "  ${GREEN}help${NC}                Show this help message"
+    echo ""
+    echo -e "Examples:"
+    echo -e "  alg test quizzes/samples/sample01"
+    echo -e "  alg create quizzes/atcoder/abc123"
+    echo -e "  alg help"
+}
+
+# Check if a command is provided
+if [ $# -eq 0 ]; then
+    show_usage
+    exit 1
+fi
+
+# Process commands
+COMMAND=$1
+shift
+
+case "$COMMAND" in
+    test)
+        # Run the test script
+        "$SCRIPT_DIR/test.sh" "$@"
+        ;;
+    create)
+        # Run the create script
+        "$SCRIPT_DIR/create.sh" "$@"
+        ;;
+    help)
+        show_usage
+        ;;
+    *)
+        echo -e "${RED}Error: Unknown command '$COMMAND'${NC}"
+        show_usage
+        exit 1
+        ;;
+esac
