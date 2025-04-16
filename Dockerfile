@@ -3,7 +3,7 @@ FROM python:3.12-slim-bookworm
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Tokyo
 
-WORKDIR /workdir
+WORKDIR /app
 
 ARG GCC_VERSION=12
 RUN apt-get update && apt-get install -y \
