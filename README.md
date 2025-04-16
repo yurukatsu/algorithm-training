@@ -91,39 +91,39 @@ The `docs` directory is intended for storing documentation about algorithms, dat
 
 ```
 docs/
-├── data-structures/              # データ構造
-│   ├── arrays-and-lists/         # 配列・リスト
-│   ├── stacks-and-queues/        # スタック・キュー
-│   ├── trees/                    # 木構造
-│   ├── heaps/                    # ヒープ
-│   ├── hash-tables/              # ハッシュテーブル
-│   └── union-find/               # Union-Find（素集合データ構造）
+├── data-structures/              # Data Structures
+│   ├── arrays-and-lists/         # Arrays and Lists
+│   ├── stacks-and-queues/        # Stacks and Queues
+│   ├── trees/                    # Trees
+│   ├── heaps/                    # Heaps
+│   ├── hash-tables/              # Hash Tables
+│   └── union-find/               # Union-Find (Disjoint Set)
 │
-├── graph-algorithms/             # グラフアルゴリズム
-│   ├── traversal/                # グラフ探索（DFS、BFS）
-│   ├── shortest-paths/           # 最短経路
-│   ├── minimum-spanning-tree/    # 最小全域木
-│   ├── topological-sort/         # トポロジカルソート
-│   └── network-flow/             # ネットワークフロー
+├── graph-algorithms/             # Graph Algorithms
+│   ├── traversal/                # Graph Traversal (DFS, BFS)
+│   ├── shortest-paths/           # Shortest Paths
+│   ├── minimum-spanning-tree/    # Minimum Spanning Tree
+│   ├── topological-sort/         # Topological Sort
+│   └── network-flow/             # Network Flow
 │
-├── dynamic-programming/          # 動的計画法（DP）
-│   ├── knapsack/                 # ナップサック問題
-│   ├── lcs/                      # 最長共通部分列
-│   ├── edit-distance/            # 編集距離
-│   ├── range-dp/                 # 区間DP
-│   ├── bit-dp/                   # ビットDP
-│   └── tree-dp/                  # 木DP
+├── dynamic-programming/          # Dynamic Programming (DP)
+│   ├── knapsack/                 # Knapsack Problem
+│   ├── lcs/                      # Longest Common Subsequence
+│   ├── edit-distance/            # Edit Distance
+│   ├── range-dp/                 # Range DP
+│   ├── bit-dp/                   # Bit DP
+│   └── tree-dp/                  # Tree DP
 │
-├── search-algorithms/            # 探索アルゴリズム
-├── sorting-algorithms/           # ソートアルゴリズム
-├── string-algorithms/            # 文字列アルゴリズム
-├── mathematical-algorithms/      # 数学的アルゴリズム
-├── computational-geometry/       # 計算幾何学
-└── techniques/                   # テクニック・パラダイム
-    ├── greedy/                   # 貪欲法
-    ├── divide-and-conquer/       # 分割統治法
-    ├── sliding-window/           # スライディングウィンドウ
-    └── two-pointers/             # 二ポインタ
+├── search-algorithms/            # Search Algorithms
+├── sorting-algorithms/           # Sorting Algorithms
+├── string-algorithms/            # String Algorithms
+├── mathematical-algorithms/      # Mathematical Algorithms
+├── computational-geometry/       # Computational Geometry
+└── techniques/                   # Techniques and Paradigms
+    ├── greedy/                   # Greedy Algorithms
+    ├── divide-and-conquer/       # Divide and Conquer
+    ├── sliding-window/           # Sliding Window
+    └── two-pointers/             # Two Pointers
 ```
 
 ## Workflow Example
