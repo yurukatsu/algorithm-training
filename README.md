@@ -85,13 +85,46 @@ alg help
 
 ## Documentation
 
-The `docs` directory is intended for storing documentation about algorithms, data structures, and programming techniques that you learn during your competitive programming journey. This can include:
+The `docs` directory is intended for storing documentation about algorithms, data structures, and programming techniques that you learn during your competitive programming journey. The directory is organized by algorithm categories to make it easy to find and reference specific techniques.
 
-- Algorithm explanations
-- Implementation techniques
-- Time and space complexity analyses
-- Common patterns and tricks
-- Notes from contests or practice sessions
+### Documentation Structure
+
+```
+docs/
+├── data-structures/              # データ構造
+│   ├── arrays-and-lists/         # 配列・リスト
+│   ├── stacks-and-queues/        # スタック・キュー
+│   ├── trees/                    # 木構造
+│   ├── heaps/                    # ヒープ
+│   ├── hash-tables/              # ハッシュテーブル
+│   └── union-find/               # Union-Find（素集合データ構造）
+│
+├── graph-algorithms/             # グラフアルゴリズム
+│   ├── traversal/                # グラフ探索（DFS、BFS）
+│   ├── shortest-paths/           # 最短経路
+│   ├── minimum-spanning-tree/    # 最小全域木
+│   ├── topological-sort/         # トポロジカルソート
+│   └── network-flow/             # ネットワークフロー
+│
+├── dynamic-programming/          # 動的計画法（DP）
+│   ├── knapsack/                 # ナップサック問題
+│   ├── lcs/                      # 最長共通部分列
+│   ├── edit-distance/            # 編集距離
+│   ├── range-dp/                 # 区間DP
+│   ├── bit-dp/                   # ビットDP
+│   └── tree-dp/                  # 木DP
+│
+├── search-algorithms/            # 探索アルゴリズム
+├── sorting-algorithms/           # ソートアルゴリズム
+├── string-algorithms/            # 文字列アルゴリズム
+├── mathematical-algorithms/      # 数学的アルゴリズム
+├── computational-geometry/       # 計算幾何学
+└── techniques/                   # テクニック・パラダイム
+    ├── greedy/                   # 貪欲法
+    ├── divide-and-conquer/       # 分割統治法
+    ├── sliding-window/           # スライディングウィンドウ
+    └── two-pointers/             # 二ポインタ
+```
 
 ## Workflow Example
 
