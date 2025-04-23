@@ -9,5 +9,6 @@ dependencies = []
 [dependency-groups]
 dev = [
     "black>=25.1.0",
+    "docling>=2.30.0",
     "isort>=6.0.1",
 ]
