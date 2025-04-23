@@ -12,7 +12,8 @@ algorithm-training/
 │   ├── atcoder/           # AtCoder problems
 │   └── samples/           # Sample problems
 │       └── sample01/      # Example problem
-│           ├── main.cpp   # Solution code
+│           ├── main.cpp   # C++ solution code
+│           ├── main.py    # Python solution code (if using Python)
 │           └── examples/  # Test cases
 │               ├── 01/    # Test case 1
 │               │   ├── in.txt   # Input
@@ -56,9 +57,16 @@ To test a solution against example cases:
 alg test quizzes/samples/sample01
 ```
 
+By default, this will test a C++ solution. To test a Python solution:
+
+```bash
+alg test --lang python quizzes/samples/sample01
+```
+
 This will:
-1. Compile the `main.cpp` file in the specified directory
-2. Run the compiled program with each input file in the `examples` directory
+1. For C++: Compile the `main.cpp` file and run the compiled program
+   For Python: Run the `main.py` file with the Python interpreter
+2. Run the program with each input file in the `examples` directory
 3. Compare the output with the expected output
 4. Display the results with color-coding (green for success, red for failure)
 
@@ -70,10 +78,21 @@ To create a new project with the standard directory structure:
 alg create quizzes/atcoder/abc123
 ```
 
+By default, this will create a C++ project. To create a Python project:
+
+```bash
+alg create --lang python quizzes/atcoder/abc123
+```
+
+Additional options:
+```bash
+alg create --num_examples 5 --template templates/custom.cpp quizzes/atcoder/abc123
+```
+
 This will:
-1. Create the directory structure with `examples/01`, `examples/02`, and `examples/03`
+1. Create the directory structure with example directories (default: 3)
 2. Create empty input and output files
-3. Create a template `main.cpp` file
+3. Create a template file (`main.cpp` for C++ or `main.py` for Python)
 
 #### Getting Help
 
@@ -126,9 +145,11 @@ docs/
     └── two-pointers/             # Two Pointers
 ```
 
-## Workflow Example
+## Workflow Examples
 
-1. Create a new project for a problem:
+### C++ Workflow
+
+1. Create a new C++ project for a problem:
    ```bash
    alg create quizzes/atcoder/abc123
    ```
@@ -146,7 +167,43 @@ docs/
 
 6. Document any new algorithms or techniques you learned in the `docs` directory
 
+### Python Workflow
+
+1. Create a new Python project for a problem:
+   ```bash
+   alg create --lang python quizzes/atcoder/abc123
+   ```
+
+2. Add the problem's example test cases to the `examples` directory
+
+3. Implement your solution in `main.py`
+
+4. Test your solution:
+   ```bash
+   alg test --lang python quizzes/atcoder/abc123
+   ```
+
+5. Iterate on your solution until all tests pass
+
+6. Document any new algorithms or techniques you learned in the `docs` directory
+
 ## Requirements
 
-- C++ compiler (g++ with C++17 support)
+- C++ compiler (g++ with C++17 support) for C++ solutions
+- Python 3.6+ for Python solutions
+- [uv](https://github.com/astral-sh/uv) - Fast Python package installer and resolver
 - Bash shell
+
+### Installing uv
+
+To install uv, follow these instructions:
+
+```bash
+# Install with curl
+curl -sSf https://astral.sh/uv/install.sh | sh
+
+# Or install with pip
+pip install uv
+```
+
+For more installation options, visit the [uv installation guide](https://github.com/astral-sh/uv#installation).

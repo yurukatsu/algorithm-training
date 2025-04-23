@@ -7,18 +7,67 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Default language
+LANG="cpp"
+
+# Help function
+show_help() {
+    echo -e "${BLUE}Usage: $0 [options] <answer_directory>${NC}"
+    echo -e "Example: $0 quizzes/samples/sample01"
+    echo -e "\nOptions:"
+    echo -e "  -l, --lang LANG   Programming language to use (cpp or python, default: cpp)"
+    echo -e "  -h, --help        Show this help message"
+}
+
+# Parse command line options
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -l|--lang)
+            LANG=$(echo "$2" | tr '[:upper:]' '[:lower:]')
+            if [[ "$LANG" != "cpp" && "$LANG" != "python" ]]; then
+                echo -e "${RED}Error: Unsupported language. Supported languages: cpp, python${NC}"
+                exit 1
+            fi
+            shift 2
+            ;;
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        -*)
+            echo -e "${RED}Invalid option: $1${NC}" >&2
+            show_help
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
 # Check arguments
 if [ $# -ne 1 ]; then
-    echo -e "${RED}Usage: $0 <answer_directory>${NC}"
+    echo -e "${RED}Usage: $0 [options] <answer_directory>${NC}"
     echo -e "Example: $0 quizzes/samples/sample01"
+    show_help
     exit 1
 fi
 
 ANSWER_DIR=$1
 
-# Check if main.cpp exists
-if [ ! -f "${ANSWER_DIR}/main.cpp" ]; then
-    echo -e "${RED}Error: ${ANSWER_DIR}/main.cpp not found${NC}"
+# Determine source file based on language
+if [ "$LANG" == "cpp" ]; then
+    SOURCE_FILE="main.cpp"
+elif [ "$LANG" == "python" ]; then
+    SOURCE_FILE="main.py"
+else
+    echo -e "${RED}Error: Unsupported language. Supported languages: cpp, python${NC}"
+    exit 1
+fi
+
+# Check if source file exists
+if [ ! -f "${ANSWER_DIR}/${SOURCE_FILE}" ]; then
+    echo -e "${RED}Error: ${ANSWER_DIR}/${SOURCE_FILE} not found${NC}"
     exit 1
 fi
 
@@ -28,15 +77,28 @@ if [ ! -d "${ANSWER_DIR}/examples" ]; then
     exit 1
 fi
 
-# Compile
-echo -e "${BLUE}Compiling...${NC}"
-g++ -std=c++17 "${ANSWER_DIR}/main.cpp" -o "${ANSWER_DIR}/main"
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Compilation error${NC}"
+# Compile or prepare for execution based on language
+if [ "$LANG" == "cpp" ]; then
+    echo -e "${BLUE}Compiling C++ code...${NC}"
+    g++ -std=c++17 "${ANSWER_DIR}/${SOURCE_FILE}" -o "${ANSWER_DIR}/main"
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Compilation error${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}Compilation successful${NC}"
+    EXEC_CMD="${ANSWER_DIR}/main"
+elif [ "$LANG" == "python" ]; then
+    echo -e "${BLUE}Using Python interpreter...${NC}"
+    # Check if Python is available
+    if ! command -v python3 &> /dev/null; then
+        echo -e "${RED}Error: Python 3 is not installed or not in PATH${NC}"
+        exit 1
+    fi
+    EXEC_CMD="uv run ${ANSWER_DIR}/${SOURCE_FILE}"
+else
+    echo -e "${RED}Error: Unsupported language. Supported languages: cpp, python${NC}"
     exit 1
 fi
-
-echo -e "${GREEN}Compilation successful${NC}"
 
 # Run test cases
 EXAMPLES_DIR="${ANSWER_DIR}/examples"
@@ -59,7 +121,7 @@ for TEST_DIR in "${EXAMPLES_DIR}"/*/; do
     echo -e "${BLUE}Running test case ${TEST_NAME}...${NC}"
 
     # Run the program and get output
-    ACTUAL_OUTPUT=$(cat "${INPUT_FILE}" | "${ANSWER_DIR}/main")
+    ACTUAL_OUTPUT=$(cat "${INPUT_FILE}" | $EXEC_CMD)
     EXPECTED_OUTPUT=$(cat "${EXPECTED_FILE}")
 
     # Compare outputs (ignoring trailing whitespace and newlines)
@@ -79,6 +141,7 @@ done
 
 # Display results
 echo ""
+echo -e "${BLUE}Language: ${LANG}${NC}"
 echo -e "${BLUE}Results: ${PASSED}/${TOTAL} test cases passed${NC}"
 
 if [ ${PASSED} -eq ${TOTAL} ]; then
