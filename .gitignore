@@ -1,2 +1,5 @@
 main
 .venv
+.vscode
+__pycache__
+*.pyc
